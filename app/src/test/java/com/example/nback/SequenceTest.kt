@@ -3,6 +3,8 @@ package com.example.nback
 import com.example.nback.model.SequenceGenerator
 import org.junit.Assert.*
 import org.junit.Test
+import kotlin.test.DefaultAsserter.assertTrue
+import kotlin.test.assertEquals
 
 class SequenceTest {
 

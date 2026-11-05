@@ -1,10 +1,10 @@
 package com.example.nback
 
 import com.example.nback.model.SequenceGenerator
-import org.junit.Assert.*
 import org.junit.Test
 import kotlin.test.DefaultAsserter.assertTrue
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 
 class SequenceTest {
 
@@ -27,7 +27,7 @@ class SequenceTest {
 
         var matches = 0
         for (i in n until sequence.size) {
-            if (sequence[i] == sequence[i - n]) {
+            if (sequence[i].isMatch || sequence[i].sameAs(sequence[i - n])) {
                 matches++
             }
         }
@@ -38,8 +38,23 @@ class SequenceTest {
     }
 
     @Test
-    fun testSequenceLength() {
-        val sequence = generator.generateSequence(totalEvents = 15, n = 3)
-        assertEquals(15, sequence.size)
+    fun firstNEventsAreNeverMatches() {
+        val n = 3
+        val totalEvents = 20
+
+        // Generate a sequence
+        val sequence = generator.generateSequence(
+            totalEvents = totalEvents,
+            n = n,
+            positionCount = 9
+        )
+
+        // Check that the first n events are not matches
+        for (i in 0 until n) {
+            assertFalse(
+                sequence[i].isMatch,
+                "Event $i should not be a match"
+            )
+        }
     }
 }

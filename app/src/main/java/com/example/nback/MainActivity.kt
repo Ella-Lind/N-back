@@ -15,7 +15,6 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             NBackTheme {
-                // Instantiates and retains the NBackViewModel across configuration changes
                 val viewModel: NBackViewModel = viewModel()
                 NBackGameApp(viewModel = viewModel)
             }
